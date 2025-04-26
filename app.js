@@ -2,6 +2,8 @@ const dotenv = require('dotenv');
 dotenv.config();
 const express = require('express');
 const cookieParser = require('cookie-parser');
+const path = require('path');
+
 const userRouter = require("./routes/user.route"); // Import the router
 
 const dbconnection = require('./config/db'); // Import the DB connection
@@ -15,6 +17,9 @@ const index_router=require('./routes/index.route');     //importing the index ro
 
 // Use the cookieParser middleware
 app.use(cookieParser());
+
+// Serve static files (CSS, JS, images)
+app.use(express.static(path.join(__dirname, 'public'))); // <-- ADD THIS LINE
 
 app.set('view engine', 'ejs'); // Set view engine to EJS
 app.use(express.json()); // Parse JSON bodies
